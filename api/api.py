@@ -120,4 +120,19 @@ loop.run_until_complete(gather)
 # with urllib.request.urlopen(request) as response:
 #     response_body = response.read().decode("utf-8")
 
+##メソッド種類##
+# method='PUT'
+# method='PATCH'
+# method='DELETE'
 
+##例外処理##
+# url = 'https://example.com/api/v1/resource'
+
+# req = urllib.request.Request(url)
+# try:
+#     with urllib.request.urlopen(req) as res:
+#         body = res.read()
+# except urllib.error.HTTPError as err:
+#     print(err.code)
+# except urllib.error.URLError as err:
+#     print(err.reason)

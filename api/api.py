@@ -4,7 +4,6 @@ import csv
 from datetime import datetime as dt
 import traceback
 import os
-import asyncio
 
 def get_api(url:str) -> dict:
     req = Request(url)
@@ -13,7 +12,7 @@ def get_api(url:str) -> dict:
         return body
 
     
-async def csv_proble_writer(problem_list:object):
+def csv_proble_writer(problem_list:object):
     with open('./yukicoderProblem.csv', 'a') as f:
         problem_list = sorted(problem_list, key=lambda x:x['No'])
         headFlag = True
@@ -30,7 +29,7 @@ async def csv_proble_writer(problem_list:object):
                 except:
                     #traceback.print_exc()
                     #print("ーーーーーーーーーーーーーーーーーーーーーーーーーーーー")
-                    continue
+                    pass
 
             try:
                 writer = csv.DictWriter(f, tmp_dick)
@@ -43,7 +42,7 @@ async def csv_proble_writer(problem_list:object):
     print("問題書き込み終了！！")
 
 
-async def csv_pass_contest_writer(pass_contest_list:object):
+def csv_pass_contest_writer(pass_contest_list:object):
     with open('./yukicoderPassContest.csv', 'a') as f:
         pass_contest_list = sorted(pass_contest_list, key=lambda x:x['Id'])
         headFlag = True
@@ -78,18 +77,8 @@ YUKICODER_PASS_CONTEST_URL = 'https://yukicoder.me/api/v1/contest/past'
 result_problems = get_api(YUKICODER_PROBLEM_URL)
 result_pass_contests = get_api(YUKICODER_PASS_CONTEST_URL)
 
-#並列処理のインスタンス宣言
-loop = asyncio.get_event_loop()
-
-#並列処理するメソッドを指定
-gather = asyncio.gather(
-    csv_proble_writer(result_problems),
-    csv_pass_contest_writer(result_pass_contests),
-)
-
-#実行
-loop.run_until_complete(gather)
-
+csv_proble_writer(result_problems),
+csv_pass_contest_writer(result_pass_contests),
 
 
 

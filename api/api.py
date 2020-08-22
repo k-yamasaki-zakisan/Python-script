@@ -23,7 +23,7 @@ def csv_writer(problem_list):
 
             try:
                 writer = csv.DictWriter(f, tmp_dick)
-                writer.writeheader()
+                #writer.writeheader()
                 writer.writerow(tmp_dick)
             except:
                 print("書き込み失敗")

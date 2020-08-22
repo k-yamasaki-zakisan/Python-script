@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import csv
 from datetime import datetime as dt
+import os
 
 QIITA_URL = 'https://qiita.com/'
 
@@ -17,6 +18,7 @@ def get_trend_items():
 
 def csv_writer(trend_items):
     with open('./qiitaTopPage.csv', 'a') as f:
+        HeadFlag = True
         for values in trend_items['trend']['edges']:
             for key, val in values.items():
                 if key == 'node':
@@ -37,7 +39,9 @@ def csv_writer(trend_items):
                            continue
                     try:
                         writer = csv.DictWriter(f, tmp_dick)
-                        #writer.writeheader()
+                        if os.stat("qiitaTopPage.csv").st_size == 0 and HeadFlag:
+                            writer.writeheader()
+                            HeadFlag = False
                         writer.writerow(tmp_dick)
                     except:
                         print("書き込み失敗")

@@ -3,6 +3,7 @@ import json
 import csv
 from datetime import datetime as dt
 import traceback
+import os
 
 YUKICODER_PROBLEM_URL = 'https://yukicoder.me/api/v1/problems/'
 
@@ -16,6 +17,7 @@ def get_problem_list():
 def csv_proble_writer(problem_list:object):
     with open('./yukicoder.csv', 'a') as f:
         problem_list = sorted(problem_list, key=lambda x:x['No'])
+        headFlag = True
         for value in problem_list:
             tmp_dick = {}
             for key, val in value.items():
@@ -33,7 +35,9 @@ def csv_proble_writer(problem_list:object):
 
             try:
                 writer = csv.DictWriter(f, tmp_dick)
-                #writer.writeheader()
+                if os.stat("yukicoder.csv").st_size == 0 and headFlag:
+                    writer.writeheader()
+                    headFlag = False
                 writer.writerow(tmp_dick)
             except:
                 print("書き込み失敗")

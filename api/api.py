@@ -90,3 +90,34 @@ gather = asyncio.gather(
 #実行
 loop.run_until_complete(gather)
 
+
+
+
+
+# #API叩き方参考
+##GET(クエリパラメータ)##
+# url = 'https://example.com/api/v1/resource'
+# params = {
+#     'foo': 123,
+# }
+
+# req = urllib.request.Request('{}?{}'.format(url, urllib.parse.urlencode(params)))
+# with urllib.request.urlopen(req) as res:
+#     body = res.read()
+
+
+###POST#
+# url = "http://xxxx/xxxx" 
+# method = "POST"
+# headers = {"Content-Type" : "application/json"}
+
+# # PythonオブジェクトをJSONに変換する
+# obj = {"xxx" : "xxxx", 123 : 123} 
+# json_data = json.dumps(obj).encode("utf-8")
+# # httpリクエストを準備してPOST
+
+# request = urllib.request.Request(url, data=json_data, method=method, headers=headers)
+# with urllib.request.urlopen(request) as response:
+#     response_body = response.read().decode("utf-8")
+
+

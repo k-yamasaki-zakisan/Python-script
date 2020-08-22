@@ -13,7 +13,7 @@ def get_problem_list():
         return body
 
     
-def csv_writer(problem_list):
+def csv_proble_writer(problem_list:object):
     with open('./yukicoder.csv', 'a') as f:
         problem_list = sorted(problem_list, key=lambda x:x['No'])
         for value in problem_list:
@@ -41,5 +41,5 @@ def csv_writer(problem_list):
 
 result = get_problem_list()
 
-csv_writer(result)
+csv_proble_writer(result)
 

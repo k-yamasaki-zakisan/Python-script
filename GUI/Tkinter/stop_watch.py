@@ -1,7 +1,7 @@
 import tkinter as tk
 import time
 
-class Application(tk.Frame):
+class StopWatch(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.pack()
@@ -22,23 +22,24 @@ class Application(tk.Frame):
         self.canvas.place(x=3,y=10)
 
         tk.Button(master,text="リセット",command=self.resetButtonClick,width=10).place(x=10, y=110)
-        tk.Button(master,text="スタート",command=self.startButtonClick,width=10).place(x=110, y=110)
-        tk.Button(master,text="ストップ",command=self.stopButtonClick,width=10).place(x=210, y=110)
+        tk.Button(master,text="スタート/ストップ",command=self.startStopButtonClick,width=20).place(x=110, y=110)
+        # tk.Button(master,text="ストップ",command=self.stopButtonClick,width=10).place(x=210, y=110)
 
         master.after(50,self.update)
     
-    def startButtonClick(self):
+    def startStopButtonClick(self):
         if not self.playTime:
-            self.startTime = time.time()-self.elapsedTime
-            self.playTime = True
+            self.watchStart()
         else:
-            self.stopButtonClick()
+            self.watchStop()
 
+    def watchStart(self):
+        self.startTime = time.time()-self.elapsedTime
+        self.playTime = True
     
-    def stopButtonClick(self):
-        if self.playTime:
-            self.stopTime = time.time()-self.startTime
-            self.playTime=False
+    def watchStop(self):
+        self.stopTime = time.time()-self.startTime
+        self.playTime=False
     
     def resetButtonClick(self):
         self.startTime = time.time()
@@ -58,7 +59,7 @@ class Application(tk.Frame):
     
 def stop_watch_main():
     win = tk.Tk()
-    app = Application(master = win)
+    app = StopWatch(master = win)
     app.mainloop()
     
 if __name__ == "__main__":

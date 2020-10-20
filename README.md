@@ -6,5 +6,5 @@
 ### api関連(liburl, requests)
 ### 非同期コールチン(asyncio)
 ### app,webサーバー作成(socket)
-### GUIミニゲーム作成(Thinter)
+### GUIミニゲーム作成(Thinter, ストップウォッチ｜タイマー｜ブロック崩し)
 

@@ -2,8 +2,9 @@
 
 ## 例
 
-### スクレイピング
-### api関連
+### スクレイピング(BeautifulSoup)
+### api関連(liburl, requests)
 ### 非同期コールチン(asyncio)
 ### app,webサーバー作成(socket)
+### GUIミニゲーム作成(Thinter)
 

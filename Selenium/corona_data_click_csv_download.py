@@ -1,6 +1,8 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import chromedriver_binary
+import pandas as pd
+
 import os
 import sys
 import glob
@@ -17,8 +19,7 @@ def csvDownload():
 
         # 一時ダウンロードフォルダパスの設定
         tmp_download_dir = f'{current_dir}/tmp_download'
-        print(current_dir)
-        print(tmp_download_dir)
+
         # 一時フォルダが存在していたら消す(前回のが残存しているかも)
         if os.path.isdir(tmp_download_dir):
             shutil.rmtree(tmp_download_dir)
@@ -71,7 +72,8 @@ def csvDownload():
         return False
 
 def csvMaker(filename:str):
-    
+    sumamy_data_path = f'{tmp_download_dir}/corona_summary_data.csv'
+
 
 def main():
     csvExist = True#csvDownload()
@@ -82,9 +84,12 @@ def main():
         tmp_download_dir = f'{current_dir}/tmp_download'
 
         # 取得ファイル一覧取得(フルパスも含み)
-        download_fileNames = glob.glob(f'{tmp_download_dir}/*')
+        download_fileNames = glob.glob(f'{tmp_download_dir}/*.*')
 
         # 前回のCSVまとめファイルを削除
+        ex_sumamy_data_path = f'{tmp_download_dir}/corona_summary_data.csv'
+        if os.path.isdir(ex_sumamy_data_path):
+            shutil.rmtree(ex_sumamy_data_path)
 
         # # 取得ファイルの一覧作成(ファイル名のみ)
         # download_fileNames = []
@@ -93,12 +98,20 @@ def main():
         #     download_fileName = tmp_fileName.replace(tmp_download_dir+'/','')
         #     download_fileNames.append(download_fileName)
 
-        if f'{tmp_download_dir}/pcr_positive_daily.csv' in download_fileNames:
-            csvMaker(f'{tmp_download_dir}/pcr_positive_daily.csv')
-        if f'{tmp_download_dir}/pcr_positive_daily.csv' in download_fileNames:
-            print('♪───Ｏ（≧∇≦）Ｏ────♪')
+        csvfiles = [
+            f'{tmp_download_dir}/pcr_positive_daily.csv',   # 陽性者数
+            f'{tmp_download_dir}/pcr_tested_daily.csv',     # 検査実施件数
+            f'{tmp_download_dir}/pcr_case_daily.csv',       # 調査機関場所
+            f'{tmp_download_dir}/cases_total.csv',          # 入院必要者数
+            f'{tmp_download_dir}/severe_daily.csv',         # 重傷者数
+            f'{tmp_download_dir}/recovery_total.csv',       # 回復者
+            f'{tmp_download_dir}/death_total.csv',          # 死者数
+        ]
 
-
+        # CSVファイル書き込み
+        for csvfile in csvfiles:
+            if csvfile in download_fileNames:
+                csvMaker(csvfile)
 
 if __name__ == "__main__":
     main()

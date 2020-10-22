@@ -71,8 +71,16 @@ def csvDownload():
         print('CSVダウンロード失敗......')
         return False
 
-def csvMaker(filename:str):
+def csvformater(file_path:str, head_flag:bool):
+    tmp_download_dir = f'{os.getcwd()}/tmp_download'
     sumamy_data_path = f'{tmp_download_dir}/corona_summary_data.csv'
+    df_header = pd.read_csv(file_path)
+    for i in df_header:
+        print(i)
+
+
+
+        #now.strftime("%Y/%m/%d")
 
 
 def main():
@@ -90,6 +98,12 @@ def main():
         ex_sumamy_data_path = f'{tmp_download_dir}/corona_summary_data.csv'
         if os.path.isdir(ex_sumamy_data_path):
             shutil.rmtree(ex_sumamy_data_path)
+        # フォーマット用フォルダが存在していたら消す(前回のが残存しているかも)
+        tmp_format_dir = f'{current_dir}/tmp_format'
+        if os.path.isdir(tmp_format_dir):
+            shutil.rmtree(tmp_format_dir)
+        # フォーマット用フォルダの作成
+        os.mkdir(tmp_format_dir)
 
         # # 取得ファイルの一覧作成(ファイル名のみ)
         # download_fileNames = []
@@ -98,7 +112,7 @@ def main():
         #     download_fileName = tmp_fileName.replace(tmp_download_dir+'/','')
         #     download_fileNames.append(download_fileName)
 
-        csvfiles = [
+        csvfile_paths = [
             f'{tmp_download_dir}/pcr_positive_daily.csv',   # 陽性者数
             f'{tmp_download_dir}/pcr_tested_daily.csv',     # 検査実施件数
             f'{tmp_download_dir}/pcr_case_daily.csv',       # 調査機関場所
@@ -108,10 +122,14 @@ def main():
             f'{tmp_download_dir}/death_total.csv',          # 死者数
         ]
 
-        # CSVファイル書き込み
-        for csvfile in csvfiles:
-            if csvfile in download_fileNames:
-                csvMaker(csvfile)
+        # CSVファイルの整形
+        head_flag = True
+        for csvfile_path in csvfile_paths:
+            if csvfile_path in csvfile_paths:
+                csvformater(csvfile_path,head_flag)
+                #csvMaker(csvfile_path,head_flag)
+                head_flag = False
+                break
 
 if __name__ == "__main__":
     main()

@@ -9,6 +9,7 @@ import glob
 import shutil
 import time
 import csv
+import datetime
 import dateutil.parser
 
 def csvDownload():
@@ -90,9 +91,7 @@ def csvformater(file_path:str, head_flag:bool):
             reader = [row for row in reader]
 
             # ヘッダーの取り出し
-            header = reader[0]
-            # ヘッダーを削除
-            reader.pop(0)
+            header = reader.pop(0)
 
             # ヘッダー書き込み
             if head_flag:
@@ -100,16 +99,20 @@ def csvformater(file_path:str, head_flag:bool):
             else:
                 writer.writerow(header[1:])
 
+            # 内容の書き込み
             for row in reader:
+                # 文字列をdate型に変換
                 row[0] = dateutil.parser.parse(row[0]).strftime("%Y/%m/%d")
-                if '2020/03/01' <= row[0]:
+                # 5日までのデータを取得(計算はdatetime型でしかできない)
+                before_5day = (datetime.datetime.now()-datetime.timedelta(days=5)).strftime("%Y/%m/%d")
+                if '2020/03/01' <= row[0] <= before_5day:
                     if head_flag:
                         writer.writerow(row)
                     else:
                         writer.writerow(row[1:])
 
 def main():
-    csvExist = True#csvDownload()
+    csvExist = csvDownload()
     if csvExist:
         # カレントディレクトリの取得
         current_dir = os.getcwd()
@@ -120,9 +123,10 @@ def main():
         download_fileNames = glob.glob(f'{tmp_download_dir}/*.*')
 
         # 前回のCSVまとめファイルを削除
-        ex_sumamy_data_path = f'{tmp_download_dir}/corona_summary_data.csv'
-        if os.path.isdir(ex_sumamy_data_path):
-            shutil.rmtree(ex_sumamy_data_path)
+        sumamy_data_path = f'{os.getcwd()}/corona_summary_data.csv'
+        if os.path.isdir(sumamy_data_path):
+            shutil.rmtree(sumamy_data_path)
+
         # フォーマット用フォルダが存在していたら消す(前回のが残存しているかも)
         tmp_format_dir = f'{current_dir}/tmp_format'
         if os.path.isdir(tmp_format_dir):
@@ -150,10 +154,29 @@ def main():
         # CSVファイルの整形
         head_flag = True
         for csvfile_path in csvfile_paths:
-            if csvfile_path in csvfile_paths:
+            if csvfile_path in download_fileNames:
                 csvformater(csvfile_path,head_flag)
-                #csvMaker(csvfile_path,head_flag)
                 head_flag = False
+        
+        # CSVファイルmerge(横に結合していくイメージ)
+        merge_files = []
+        format_csvfile_paths = [
+            f'{tmp_format_dir}/pcr_positive_daily.csv',   # 陽性者数
+            f'{tmp_format_dir}/pcr_tested_daily.csv',     # 検査実施件数
+            f'{tmp_format_dir}/pcr_case_daily.csv',       # 調査機関場所
+            f'{tmp_format_dir}/cases_total.csv',          # 入院必要者数
+            f'{tmp_format_dir}/severe_daily.csv',         # 重傷者数
+            f'{tmp_format_dir}/recovery_total.csv',       # 回復者
+            f'{tmp_format_dir}/death_total.csv',          # 死者数
+        ]
+        for format_csvfile_path in format_csvfile_paths:
+            # このパスの先に指定のファイルがある場合はTrue
+            if os.path.isfile(format_csvfile_path):
+                merge_files.append(pd.read_csv(format_csvfile_path))
+        
+        df_concat = pd.concat(merge_files,axis=1)
+        df_concat.to_csv(sumamy_data_path,index=None)
+
 
 if __name__ == "__main__":
     main()

@@ -8,6 +8,8 @@ import sys
 import glob
 import shutil
 import time
+import csv
+import dateutil.parser
 
 def csvDownload():
     url = "https://www.mhlw.go.jp/stf/covid-19/open-data.html"
@@ -73,15 +75,38 @@ def csvDownload():
 
 def csvformater(file_path:str, head_flag:bool):
     tmp_download_dir = f'{os.getcwd()}/tmp_download'
-    sumamy_data_path = f'{tmp_download_dir}/corona_summary_data.csv'
-    df_header = pd.read_csv(file_path)
-    for i in df_header:
-        print(i)
+    tmp_format_dir = f'{os.getcwd()}/tmp_format'
 
+    # csv名取得
+    file_name = file_path.replace(f'{tmp_download_dir}/','')
 
+    format_data_path = f'{tmp_format_dir}/{file_name}'    
 
-        #now.strftime("%Y/%m/%d")
+    with open(format_data_path, 'w') as w:
+        writer = csv.writer(w)
+        with open(file_path) as f:
+            reader = csv.reader(f)
+            # 配列化
+            reader = [row for row in reader]
 
+            # ヘッダーの取り出し
+            header = reader[0]
+            # ヘッダーを削除
+            reader.pop(0)
+
+            # ヘッダー書き込み
+            if head_flag:
+                writer.writerow(header)
+            else:
+                writer.writerow(header[1:])
+
+            for row in reader:
+                row[0] = dateutil.parser.parse(row[0]).strftime("%Y/%m/%d")
+                if '2020/03/01' <= row[0]:
+                    if head_flag:
+                        writer.writerow(row)
+                    else:
+                        writer.writerow(row[1:])
 
 def main():
     csvExist = True#csvDownload()
@@ -129,7 +154,6 @@ def main():
                 csvformater(csvfile_path,head_flag)
                 #csvMaker(csvfile_path,head_flag)
                 head_flag = False
-                break
 
 if __name__ == "__main__":
     main()

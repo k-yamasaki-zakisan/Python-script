@@ -2,6 +2,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import chromedriver_binary
 import pandas as pd
+import matplotlib.pyplot as plt
 
 import os
 import sys
@@ -112,7 +113,7 @@ def csvformater(file_path:str, head_flag:bool):
                         writer.writerow(row[1:])
 
 def main():
-    csvExist = csvDownload()
+    csvExist = True#csvDownload()
     if csvExist:
         # カレントディレクトリの取得
         current_dir = os.getcwd()
@@ -120,7 +121,7 @@ def main():
         tmp_download_dir = f'{current_dir}/tmp_download'
 
         # 取得ファイル一覧取得(フルパスも含み)
-        download_fileNames = glob.glob(f'{tmp_download_dir}/*.*')
+        download_fileNames = glob.glob(f'{tmp_download_dir}/*.csv')
 
         # 前回のCSVまとめファイルを削除
         sumamy_data_path = f'{os.getcwd()}/corona_summary_data.csv'
@@ -177,6 +178,8 @@ def main():
         df_concat = pd.concat(merge_files,axis=1)
         df_concat.to_csv(sumamy_data_path,index=None)
 
+        # TODO データの可視化
+        df_concat.plot()
 
 if __name__ == "__main__":
     main()

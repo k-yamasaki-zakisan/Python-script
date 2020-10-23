@@ -2,7 +2,6 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import chromedriver_binary
 import pandas as pd
-import matplotlib.pyplot as plt
 
 import os
 import sys
@@ -191,11 +190,10 @@ def main():
         df_concat = pd.concat(merge_files,axis=1)
         df_concat.to_csv(sumamy_data_path,index=None)
 
-        
-
-        # TODO データの可視化
-        # df_concat.plot()
-        # df_concat.show()
+        try:
+            graphMaker()
+        except:
+            print('グラフ化失敗')
 
 if __name__ == "__main__":
     main()

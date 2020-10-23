@@ -1,3 +1,5 @@
+from graph_maker import graphMaker
+
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import chromedriver_binary
@@ -85,7 +87,7 @@ def csvformater(file_path:str, head_flag:bool):
     # tmp_download_dir = f'{os.getcwd()}/tmp_download'
     # tmp_format_dir = f'{os.getcwd()}/tmp_format'
     tmp_download_dir = './tmp_download'
-    tmp_format_dir = './tmp_format_csv'
+    tmp_format_dir = './tmp_format'
 
     # csv名取得
     file_name = file_path.replace(f'{tmp_download_dir}/','')
@@ -112,9 +114,10 @@ def csvformater(file_path:str, head_flag:bool):
             for row in reader:
                 # 文字列をdate型に変換
                 row[0] = dateutil.parser.parse(row[0]).strftime("%Y/%m/%d")
+                day = int(dateutil.parser.parse(row[0]).strftime("%d"))    # データの間引き
                 # 5日までのデータを取得(計算はdatetime型でしかできない)
                 before_5day = (datetime.datetime.now()-datetime.timedelta(days=5)).strftime("%Y/%m/%d")
-                if '2020/03/01' <= row[0] <= before_5day:
+                if '2020/03/01' <= row[0] <= before_5day and day%10==0:
                     if head_flag:
                         writer.writerow(row)
                     else:

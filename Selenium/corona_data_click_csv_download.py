@@ -34,6 +34,10 @@ def csvDownload():
         options = webdriver.ChromeOptions()
         prefs = {'download.default_directory' : tmp_download_dir }
         options.add_experimental_option('prefs',prefs)
+        # シークレットウインドウで立ち上げ(実際には立ち上げない)
+        options.add_experimental_option("useAutomationExtension", False)
+        options.add_argument("--ignore-certificate-errors")
+        options.add_argument("--headless")
 
         # オプションを適用してChromeを起動
         driver = webdriver.Chrome(chrome_options = options)
@@ -112,8 +116,9 @@ def csvformater(file_path:str, head_flag:bool):
                     else:
                         writer.writerow(row[1:])
 
+
 def main():
-    csvExist = True#csvDownload()
+    csvExist = csvDownload()
     if csvExist:
         # カレントディレクトリの取得
         current_dir = os.getcwd()
@@ -124,7 +129,7 @@ def main():
         download_fileNames = glob.glob(f'{tmp_download_dir}/*.csv')
 
         # 前回のCSVまとめファイルを削除
-        sumamy_data_path = f'{os.getcwd()}/corona_summary_data.csv'
+        sumamy_data_path = f'{os.getcwd()}/corona_summary_data_in_japan.csv'
         if os.path.isdir(sumamy_data_path):
             shutil.rmtree(sumamy_data_path)
 
@@ -178,8 +183,11 @@ def main():
         df_concat = pd.concat(merge_files,axis=1)
         df_concat.to_csv(sumamy_data_path,index=None)
 
+        
+
         # TODO データの可視化
-        df_concat.plot()
+        # df_concat.plot()
+        # df_concat.show()
 
 if __name__ == "__main__":
     main()

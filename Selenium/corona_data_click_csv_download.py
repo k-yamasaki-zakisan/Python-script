@@ -85,7 +85,7 @@ def csvformater(file_path:str, head_flag:bool):
     # tmp_download_dir = f'{os.getcwd()}/tmp_download'
     # tmp_format_dir = f'{os.getcwd()}/tmp_format'
     tmp_download_dir = './tmp_download'
-    tmp_format_dir = './tmp_format'
+    tmp_format_dir = './tmp_format_csv'
 
     # csv名取得
     file_name = file_path.replace(f'{tmp_download_dir}/','')

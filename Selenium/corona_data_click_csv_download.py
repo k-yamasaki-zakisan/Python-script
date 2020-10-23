@@ -22,7 +22,8 @@ def csvDownload():
         current_dir = os.getcwd()
 
         # 一時ダウンロードフォルダパスの設定
-        tmp_download_dir = f'{current_dir}/tmp_download'
+        # tmp_download_dir = f'{current_dir}/tmp_download'
+        tmp_download_dir = './tmp_download'
 
         # 一時フォルダが存在していたら消す(前回のが残存しているかも)
         if os.path.isdir(tmp_download_dir):
@@ -41,6 +42,8 @@ def csvDownload():
 
         # オプションを適用してChromeを起動
         driver = webdriver.Chrome(chrome_options = options)
+
+        time.sleep(5)
 
         # Seleniumでダウンロード開始処理
         driver.get(url)
@@ -80,8 +83,10 @@ def csvDownload():
         return False
 
 def csvformater(file_path:str, head_flag:bool):
-    tmp_download_dir = f'{os.getcwd()}/tmp_download'
-    tmp_format_dir = f'{os.getcwd()}/tmp_format'
+    # tmp_download_dir = f'{os.getcwd()}/tmp_download'
+    # tmp_format_dir = f'{os.getcwd()}/tmp_format'
+    tmp_download_dir = './tmp_download'
+    tmp_format_dir = './tmp_format'
 
     # csv名取得
     file_name = file_path.replace(f'{tmp_download_dir}/','')
@@ -123,18 +128,21 @@ def main():
         # カレントディレクトリの取得
         current_dir = os.getcwd()
         # 一時ダウンロードフォルダパスの設定
-        tmp_download_dir = f'{current_dir}/tmp_download'
+        #tmp_download_dir = f'{current_dir}/tmp_download'
+        tmp_download_dir = './tmp_download'
 
         # 取得ファイル一覧取得(フルパスも含み)
         download_fileNames = glob.glob(f'{tmp_download_dir}/*.csv')
 
         # 前回のCSVまとめファイルを削除
-        sumamy_data_path = f'{os.getcwd()}/corona_summary_data_in_japan.csv'
+        # sumamy_data_path = f'{os.getcwd()}/corona_summary_data_in_japan.csv'
+        sumamy_data_path = './corona_summary_data_in_japan.csv'
         if os.path.isdir(sumamy_data_path):
             shutil.rmtree(sumamy_data_path)
 
         # フォーマット用フォルダが存在していたら消す(前回のが残存しているかも)
-        tmp_format_dir = f'{current_dir}/tmp_format'
+        # tmp_format_dir = f'{current_dir}/tmp_format'
+        tmp_format_dir = './tmp_format'
         if os.path.isdir(tmp_format_dir):
             shutil.rmtree(tmp_format_dir)
         # フォーマット用フォルダの作成
@@ -150,8 +158,8 @@ def main():
         csvfile_paths = [
             f'{tmp_download_dir}/pcr_positive_daily.csv',   # 陽性者数
             f'{tmp_download_dir}/pcr_tested_daily.csv',     # 検査実施件数
-            f'{tmp_download_dir}/pcr_case_daily.csv',       # 調査機関場所
-            f'{tmp_download_dir}/cases_total.csv',          # 入院必要者数
+            # f'{tmp_download_dir}/pcr_case_daily.csv',       # 調査機関場所
+            # f'{tmp_download_dir}/cases_total.csv',          # 入院必要者数
             f'{tmp_download_dir}/severe_daily.csv',         # 重傷者数
             f'{tmp_download_dir}/recovery_total.csv',       # 回復者
             f'{tmp_download_dir}/death_total.csv',          # 死者数
@@ -169,8 +177,8 @@ def main():
         format_csvfile_paths = [
             f'{tmp_format_dir}/pcr_positive_daily.csv',   # 陽性者数
             f'{tmp_format_dir}/pcr_tested_daily.csv',     # 検査実施件数
-            f'{tmp_format_dir}/pcr_case_daily.csv',       # 調査機関場所
-            f'{tmp_format_dir}/cases_total.csv',          # 入院必要者数
+            # f'{tmp_format_dir}/pcr_case_daily.csv',       # 調査機関場所
+            # f'{tmp_format_dir}/cases_total.csv',          # 入院必要者数
             f'{tmp_format_dir}/severe_daily.csv',         # 重傷者数
             f'{tmp_format_dir}/recovery_total.csv',       # 回復者
             f'{tmp_format_dir}/death_total.csv',          # 死者数

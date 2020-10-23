@@ -1,5 +1,5 @@
 Country,Total Cases,Total Deaths,Continent
-United States,"8,654,301","228,292",North America
+United States,"8,658,314","228,333",North America
 India,"7,759,640","117,336",Asia
 Brazil,"5,332,634","155,962",South America
 Russia,"1,463,306","25,242",Europe
@@ -166,8 +166,8 @@ Niger,"1,215",69,Africa
 Vietnam,"1,148",35,Asia
 Sao Tome & Principe,935,15,Africa
 Curaçao,804,1,North America
+San Marino,802,42,Europe
 Channel Islands,784,48,Europe
-San Marino,774,42,Europe
 Sint Maarten,769,22,North America
 Turks and Caicos,698,6,North America
 Gibraltar,630,0,Europe
@@ -179,7 +179,7 @@ Comoros,517,7,Africa
 Tanzania,509,21,Africa
 Faeroe Islands,490,0,Europe
 Eritrea,457,0,Africa
-Mauritius,421,10,Africa
+Mauritius,425,10,Africa
 Isle of Man,348,24,Europe
 Bhutan,332,0,Asia
 Mongolia,328,0,Asia

@@ -5,4 +5,4 @@ import chromedriver_binary             # パスを通すためのコード
 driver = webdriver.Chrome()            # Chromeを準備
 driver.get('https://www.google.com/')  # Googleを開く
 time.sleep(5)                          # 5秒間待機
-driver.quit()  
+driver.quit()

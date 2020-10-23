@@ -34,7 +34,7 @@ def csvDownload():
         options = webdriver.ChromeOptions()
         prefs = {'download.default_directory' : tmp_download_dir }
         options.add_experimental_option('prefs',prefs)
-        # シークレットウインドウで立ち上げ(実際には立ち上げない)
+        # シークレットウインドウで立ち上げ(裏でブラウザを立ち上げている)
         options.add_experimental_option("useAutomationExtension", False)
         options.add_argument("--ignore-certificate-errors")
         options.add_argument("--headless")

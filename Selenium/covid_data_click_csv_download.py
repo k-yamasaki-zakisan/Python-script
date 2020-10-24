@@ -138,7 +138,7 @@ def main():
 
         # 前回のCSVまとめファイルを削除
         # sumamy_data_path = f'{os.getcwd()}/corona_summary_data_in_japan.csv'
-        sumamy_data_path = './corona_summary_data_in_japan.csv'
+        sumamy_data_path = './covid_summary_data_in_japan.csv'
         if os.path.isdir(sumamy_data_path):
             shutil.rmtree(sumamy_data_path)
 

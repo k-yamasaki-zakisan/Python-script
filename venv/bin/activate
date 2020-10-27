@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/kazu/Desktop/study/python_relation/Selenium/venv"
+VIRTUAL_ENV="/Users/kazu/Desktop/study/python_relation/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

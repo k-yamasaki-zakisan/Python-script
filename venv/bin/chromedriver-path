@@ -1,4 +1,4 @@
-#!/Users/kazu/Desktop/study/python_relation/Selenium/venv/bin/python3
+#!/Users/kazu/Desktop/study/python_relation/venv/bin/python3
 # EASY-INSTALL-ENTRY-SCRIPT: 'chromedriver-binary==86.0.4240.22.0','console_scripts','chromedriver-path'
 import re
 import sys

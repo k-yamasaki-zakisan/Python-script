@@ -6,7 +6,7 @@ import japanize_matplotlib
 import os
 
 def graphMaker():
-    summary_csv_path = './corona_summary_data_in_japan.csv'
+    summary_csv_path = './covid_summary_data_in_japan.csv'
     # ファイルがあるか確認なければ例外発生
     if os.path.isfile(summary_csv_path):
         # グラフ化のおまじない

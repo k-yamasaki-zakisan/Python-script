@@ -1,3 +1,5 @@
+from slackbot.bot import respond_to
+
 import requests
 import json
 import os
@@ -17,5 +19,13 @@ def get_weather():
     jsontext = json.dumps(data,indent=4)
     print(jsontext)
 
+# テスト用実行関数
 if __name__ == "__main__":
     get_weather()
+
+#@respond_to('^(今日|明日|明後日)の天気$')
+@respond_to('天気')
+#def whether_1(message, group):
+def whether_1(message):
+    print(message)
+    message.reply('チュキ')

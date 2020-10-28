@@ -23,7 +23,7 @@ weather_text += f"天候：{data['weather'][0]['main']}\n"
 weather_text += f"温度：{str(data['main']['temp'])}度\n"
 
 # WEB_HOOK_URLは下準備で発行したURLを設定しください
-WEB_HOOK_URL = os.environ['WEB_HOKK_URL']
+WEB_HOOK_URL = os.environ['WEB_HOOK_URL']
 
 requests.post(WEB_HOOK_URL, data=json.dumps({
     "text" : weather_text,

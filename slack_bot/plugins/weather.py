@@ -15,9 +15,8 @@ def get_weather():
     url = f"http://api.openweathermap.org/data/2.5/weather?units=metric&q={city}&appid={WHEATHER_KEY}"
 
     response = requests.get(url)
-    data = response.json()
-    jsontext = json.dumps(data,indent=4)
-    print(jsontext)
+    return response.json()
+
 
 # テスト用実行関数
 if __name__ == "__main__":
@@ -27,5 +26,6 @@ if __name__ == "__main__":
 @respond_to('天気')
 #def whether_1(message, group):
 def whether_1(message):
-    print(message)
-    message.reply('チュキ')
+    data = get_weather()
+    text = f"都市：{data['name']}\n 天候：{data['weather'][0]['main']}\n 温度：{str(data['main']['temp'])}度\n"
+    message.reply(text)

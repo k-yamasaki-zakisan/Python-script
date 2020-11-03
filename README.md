@@ -2,7 +2,7 @@
 
 ## 一覧
 
-### WEBスクレイピング(BeautifulSoup、Qiitaトップページ一覧取得後CSV書き込み)
+### WEBスクレイピング(BeautifulSoup, Qiitaトップページ一覧取得後CSV書き込み)
 [リンク](https://github.com/kazuyoshi-tech/python-script/tree/master/api_scraptig/scraping "リンク")
 
 ### api関連(urllib, requests)
@@ -17,6 +17,8 @@
 ### GUIミニゲーム作成(Thinter, ストップウォッチ｜タイマー｜ブロック崩し)
 [リンク](https://github.com/kazuyoshi-tech/python-script/tree/master/GUI/Tkinter "リンク")
 
-### WEBスクレイピング(selenium、BeautifulSoup、pandas、matplotlib、複数のCSV一括ダウンロード | CSVデータ整形と結合 | グラフ化)
-[リンク](https://github.com/kazuyoshi-tech/python-script/tree/master/Selenium "リンク")
+### WEBスクレイピング(selenium、BeautifulSoup, pandas, matplotlib, 複数のCSV一括ダウンロード | CSVデータ整形と結合 | グラフ化)
+[リンク](https://github.com/kazuyoshi-tech/Python-script/tree/master/Selenium/product "リンク")
 
+### slack bot(slackbot, requests,  | スラックで動的返信指切り替え | 天気情報を教えてくれるbot)
+[リンク](https://github.com/kazuyoshi-tech/Python-script/tree/master/slack_bot/product "リンク")

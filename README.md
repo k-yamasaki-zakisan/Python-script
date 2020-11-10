@@ -20,8 +20,14 @@
 ### WEBスクレイピング(selenium、BeautifulSoup, pandas, matplotlib, 複数のCSV一括ダウンロード | CSVデータ整形と結合 | グラフ化)
 [リンク](https://github.com/kazuyoshi-tech/Python-script/tree/master/Selenium/product "リンク")
 
-### slack bot(slackbot, requests,  | スラックbot | 入力値によって各都市の天気情報を教えてくれる)
+### slack bot(slackbot, requests, | スラックbot | 入力値によって各都市の天気情報を教えてくれる)
 [リンク](https://github.com/kazuyoshi-tech/Python-script/tree/master/slack_bot/product "リンク")
 
-### PDFのCSV化(tabula-py, Javaのインストール必須 PDF内テーブルの一括CSV化)
+### PDFのCSV化(tabula-py, | Javaのインストール必須 PDF内テーブルの一括CSV化)
 [リンク](https://github.com/kazuyoshi-tech/Python-script/tree/master/PDF_CSV_converter "リンク")
+
+### 文章の要約(sumy, spacy, neologdn, |  文章の読み込み | 要約 | ファイルに書き込み)
+[リンク](https://github.com/kazuyoshi-tech/Python-script/tree/master/wrap "リンク")
+
+参考：https://deepblue-ts.co.jp/python/sumy-extractives-ummarization/
+

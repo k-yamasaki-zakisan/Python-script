@@ -31,3 +31,6 @@
 
 参考：https://deepblue-ts.co.jp/python/sumy-extractives-ummarization/
 
+### AWS lambda-LineBot(ラインのチャンネルから投稿| AWSからレスポンスのメッセージ)
+[リンク](https://github.com/kazuyoshi-tech/Python-script/tree/master/line-bot-lambda "リンク")
+
